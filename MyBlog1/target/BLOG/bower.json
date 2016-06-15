@@ -1,0 +1,17 @@
+{
+  "name": "MyBlog",
+  "description": "Bloging",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "dependencies": {
+    "angular": "^1.5.6",
+    "angular-material": "^1.0.9",
+    "angular-route": "^1.5.6",
+    "angular-resource": "^1.5.6",
+    "lodash": "^4.13.1",
+    "restangular": "^1.5.2",
+    "firebase": "^3.0.4",
+    "hammerjs": "^2.0.8"
+  }
+}

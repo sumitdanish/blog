@@ -23,6 +23,7 @@ import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.WebUtils;
 
@@ -47,7 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.httpBasic().and().authorizeRequests().antMatchers("/index.html", "/home.html", "/login.html", "/")
 				.permitAll().anyRequest().authenticated().and()
-				.csrf().csrfTokenRepository(csrfTokenRepository()).and().addFilterAfter(csrfFilter(), CsrfFilter.class);
+				.csrf().csrfTokenRepository(csrfTokenRepository()).and().addFilterAfter(csrfFilter(), CsrfFilter.class)
+				;
 	}
 
 	private Filter csrfFilter() {
@@ -65,6 +67,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						response.addCookie(cookie);
 					}
 				}
+				response.setHeader("Pragma", "no-cache");
+			    response.setHeader("Cache-Control", "no-cache");
+			    response.setDateHeader("Expires", 0);
 				filterChain.doFilter(request, response);
 			}
 		};

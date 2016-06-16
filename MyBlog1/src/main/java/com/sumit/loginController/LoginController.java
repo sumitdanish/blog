@@ -4,6 +4,12 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,11 +39,15 @@ public class LoginController {
 	public String admin(){
 		return "admin";
 	}
-	@RequestMapping(value="/signIn", method = RequestMethod.GET)
-	public ModelAndView signIn(){
-		System.out.println("Calling SIngIn");
-		ModelAndView model = new ModelAndView();
-		model.setViewName("index");
-		return model;
+	@RequestMapping(value="/logout",method=RequestMethod.GET)
+	public void logout(HttpServletRequest request,HttpServletResponse response){
+		System.out.println("calling logout");
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if(auth!=null){
+			SecurityContextLogoutHandler logo = new SecurityContextLogoutHandler();
+			logo.setClearAuthentication(true);
+			logo.setInvalidateHttpSession(true);
+			logo.logout(request, response, auth);
+		}
 	}
 }

@@ -22,11 +22,17 @@
             <span>Home</span>
         </h2>
         <span flex></span>
-        <div>
-	        <li><a href="#/home">home</a></li>
-			<li><a href="#/login">Login</a></li>
-        </div>
+        <font style="font-size : 12px;">
+        	<a href="#/home">home</a>
+        	<a href="#/login">Login</a>
+        	<a ng-show="isAuth" href="#/logout" ng-click="logout()">Logout</a>
+        </font>
     </div>
 </md-toolbar>
+<div>
+
+Welcome to index page
+</div>
 <div ng-view class="container"></div>
+</body>
 </html>

@@ -1,11 +1,31 @@
-<html>
+<html ng-app="loginApp">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<div ng-show="error">
-    There was a problem logging in. Please try again.
-</div>
-
+<link rel="stylesheet" href="./bower_components/angular-material/angular-material.css">
+</head>
+<script src="./bower_components/angular/angular.js"></script>
+<script src="./bower_components/angular-aria/angular-aria.js"></script>
+<script src="./bower_components/angular-animate/angular-animate.js"></script>
+<script src="./bower_components/angular-material/angular-material.js"></script>
+<script src="./bower_components/angular-messages/angular-messages.js"></script>
+<script src="./bower_components/restangular/src/restangular.js"></script>
+<script src="./bower_components/lodash/lodash.js"></script>
+<script src="./bower_components/angular-resource/angular-resource.js"></script>
+<script src="./bower_components/angular-route/angular-route.js"></script>
+<script src="./js/app.js"></script>
+<body ng-cloak class="ng-cloak" ng-controller="loginController as controller">
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <h2>
+            <span>Home</span>
+        </h2>
+        <span flex></span>
+        <font style="font-size : 12px;">
+        	<a href="home.html">home</a>
+        </font>
+    </div>
+</md-toolbar>
 <form role="form" ng-submit="controller.login()">
     <div class="form-group">
         <label for="username">Username:</label> <input type="text"

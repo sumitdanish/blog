@@ -2,12 +2,12 @@
  * 
  */
 
-var loginApp = angular.module('loginApp', [ 'ngMaterial', 'ngMessages',
-		'ngRoute' ]).config(function($routeProvider, $httpProvider) {
+var moduleList = [ 'ngMaterial', 'ngMessages', 'ngRoute','homeApp','userAction' ];
+var loginApp = angular.module('loginApp', moduleList).config(function($routeProvider, $httpProvider) {
 			$routeProvider.when('/home', {
 				templateUrl : 'home.html',
-				controller : 'homeController',
-				controllerAs : 'controller'
+				controller : 'homeAppController',
+				controllerAs : 'homeAC'
 			}).when('/login', {
 				templateUrl : 'login.html',
 				controller : 'loginController',
@@ -20,6 +20,17 @@ var loginApp = angular.module('loginApp', [ 'ngMaterial', 'ngMessages',
 
 			$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 		});
+loginApp.service('sharedProperties',function(){
+	var username = '';
+	return{
+		getUsername:function(){
+			return username;
+		},
+		setUsername:function(user){
+			username = user;
+		}
+	};
+});
 loginApp.controller('loginController',
 		[
 				'$scope',

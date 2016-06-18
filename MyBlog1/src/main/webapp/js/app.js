@@ -2,31 +2,38 @@
  * 
  */
 
-var moduleList = [ 'ngMaterial', 'ngMessages', 'ngRoute','homeApp','userAction' ];
-var loginApp = angular.module('loginApp', moduleList).config(function($routeProvider, $httpProvider) {
-			$routeProvider.when('/home', {
-				templateUrl : 'home.html',
-				controller : 'homeAppController',
-				controllerAs : 'homeAC'
-			}).when('/login', {
-				templateUrl : 'login.html',
-				controller : 'loginController',
-				controllerAs : 'controller'
-			}).when('/useraction', {
-				templateUrl : 'useraction.html',
-				controller : 'userActionController',
-				controllerAs : 'userAC'
-			}).otherwise('/useraciotn');
+var moduleList = [ ];
+var loginApp = angular
+		.module('loginApp', ['ngMaterial', 'ngMessages', 'ngRoute', 'homeApp',
+		             		'userAction'])
+		.config(['$stateProvider',
+				function($stateProvider) {
+					$stateProvider.state('home', {
+						url : '/home',
+						templateUrl : 'home.html',
+						controller : 'homeAppController',
+						controllerAs : 'homeAC'
+					}).state('login', {
+						url : '/login',
+						templateUrl : 'login.html',
+						controller : 'loginController',
+						controllerAs : 'controller'
+					}).state('useraction', {
+						url : '/useraction',
+						templateUrl : 'useraction.html',
+						controller : 'userActionController',
+						controllerAs : 'userAC'
+					});
 
-			$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
-		});
-loginApp.service('sharedProperties',function(){
+					$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+				}]);
+loginApp.service('sharedProperties', function() {
 	var username = '';
-	return{
-		getUsername:function(){
+	return {
+		getUsername : function() {
 			return username;
 		},
-		setUsername:function(user){
+		setUsername : function(user) {
 			username = user;
 		}
 	};

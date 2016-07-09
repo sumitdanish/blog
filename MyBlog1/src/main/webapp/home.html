@@ -13,12 +13,24 @@
 <script src="./bower_components/lodash/lodash.js"></script>
 <script src="./bower_components/angular-resource/angular-resource.js"></script>
 <script src="./bower_components/angular-route/angular-route.js"></script>
+<script src="./bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="./bower_components/angular-cookies/angular-cookies.js"></script>
 <script src="./js/app.js"></script>
 <script src = "./js/index.js"></script>
+<script src = "./js/useraction.js"></script>
 <script src = "./js/home.js"></script>
 <body ng-cloak class="ng-cloak" ng-controller="homeAppController">
-	<div>
-		Welcome to home : 
-	</div>
+	<md-toolbar>
+    <div class="md-toolbar-tools">
+        <h2>
+            <span>{{userDetails.username}}</span>
+        </h2>
+        <span flex></span>
+        <font style="font-size : 12px;">
+        	<a href="home.html">home</a>
+        	<a href="#" ng-click="logout()">Logout</a>
+        </font>
+    </div>
+</md-toolbar>
 </body>
 </html>

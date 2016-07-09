@@ -4,11 +4,11 @@
 
 var moduleList = [ ];
 var loginApp = angular
-		.module('loginApp', ['ngMaterial', 'ngMessages', 'ngRoute', 'homeApp',
-		             		'userAction'])
-		.config(['$stateProvider',
-				function($stateProvider) {
-					$stateProvider.state('home', {
+		.module('loginApp', ['ngMaterial', 'ngMessages', 'ngRoute', 'homeApp','ngCookies',
+		             		'userAction','ui.router'])
+		.config(['$stateProvider','$httpProvider',
+				function($stateProvider,$httpProvider) {
+					$stateProvider.state('/home', {
 						url : '/home',
 						templateUrl : 'home.html',
 						controller : 'homeAppController',
@@ -45,8 +45,10 @@ loginApp.controller('loginController',
 				'$location',
 				'$rootScope',
 				'$route',
+                '$window',
+                '$cookies',
 				'sharedProperties',
-				function($scope, $http, $location, $rootScope, $route,
+				function($scope, $http, $location, $rootScope, $route,$window,$cookies,
 						sharedProperties) {
 					var self = this;
 					self.tab = function(route) {
@@ -84,8 +86,10 @@ loginApp.controller('loginController',
 					self.login = function() {
 						auth(self.credentials, function() {
 							if ($rootScope.isAuth) {
-								$location.path('/home');
-								$rootScope.error = false;
+								$window.location.href = 'home.html';
+                                console.log("Login Name : "+sharedProperties.getUsername());
+                                 $cookies.put('username',sharedProperties.getUsername());
+								$rootScope.error = false; 
 							} else {
 								console.log("IsAuth");
 								$location.path('/login');

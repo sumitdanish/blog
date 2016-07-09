@@ -58,6 +58,8 @@ public class WebConfiguration extends WebMvcConfigurerAdapter{
 		 return resolver;
 	 }
 
+	 
+	 
 	
 
 //	@Override
